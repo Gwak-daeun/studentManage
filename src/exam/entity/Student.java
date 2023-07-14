@@ -83,13 +83,13 @@ public class Student {
     @Override
     public String toString() {
         return "학생 " + stuName + " : [" +
-                "stuNo=" + stuNo +
-                ", stuName='" + stuName + '\'' +
-                ", korScore=" + korScore +
-                ", engScore=" + engScore +
-                ", mathScore=" + mathScore +
-                ", average=" + average +
-                ", gender='" + gender + '\'' +
+                "학번 = " + stuNo +
+                ", 이름 = '" + stuName + '\'' +
+                ", 국어 = " + korScore +
+                ", 영어 = " + engScore +
+                ", 수학 = " + mathScore +
+                ", 평균 = " + average +
+                ", 성별 = '" + gender + '\'' +
                 ']';
     }
 }

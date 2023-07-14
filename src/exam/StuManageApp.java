@@ -20,31 +20,35 @@ public class StuManageApp {
             studentEntity.menu();
             Scanner sc1 = new Scanner(System.in);
             String num1 = sc1.nextLine();
-            switch (num1){
-                case "1" : //학생 추가
+            switch (num1) {
+                case "1": //학생 추가
                     studentEntity.addStudent(studentList);
-                break;
+                    break;
                 case "2": // 이름 검색
-
-                break;
+                    studentEntity.searchStudent(studentList);
+                    break;
                 case "3": //석차
                     studentEntity.sortStudents(studentList);
-                break;
+                    break;
                 case "4": //수정
-
-                break;
+                    studentEntity.editStudents(studentList);
+                    break;
 
                 case "5": //삭제
+                    studentEntity.deleteStudent(studentList);
+                    break;
 
-                break;
+                case "6": // 나가기
+                    System.out.println("학생 관리 시스템을 종료합니다.");
+                    return;
 
                 default:
                     System.out.println("잘못 입력 하셨습니다. 메뉴에 있는 숫자를 입력하세요.");
-                break;
+                    break;
             }
 
-
         }
+
     }
 }
 
