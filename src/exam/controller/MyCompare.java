@@ -1,6 +1,6 @@
 package exam.controller;
 
-import exam.entity.Student;
+import exam.model.entity.Student;
 
 import java.util.Comparator;
 

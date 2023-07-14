@@ -1,4 +1,4 @@
-package exam.entity;
+package exam.model.entity;
 
 public class Human {
    private String gender;

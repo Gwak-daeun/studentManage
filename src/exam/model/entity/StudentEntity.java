@@ -1,4 +1,4 @@
-package exam.entity;
+package exam.model.entity;
 
 import exam.controller.MyCompare;
 
@@ -123,6 +123,7 @@ public class StudentEntity {
 
         String word = sc.nextLine();
         boolean isNumber = word.matches("\\d+"); // 사용자가 숫자를 입력했는지 문자열을 입력했는지 체크하기 위한 변수
+        int count = 0;
         if (isNumber) { // 숫자 입력
 //            System.out.println("찾을 학번: " + word);
             for (int i = 0; i < studentList.size(); i++) { // 입력한 학번으로 학생 찾기
@@ -136,52 +137,17 @@ public class StudentEntity {
 
                     String word2 = sc.nextLine();
 
-                    switch (word2) {
-                        case "1":
-                            System.out.println("이름 수정");
-                            System.out.println("이름: " + studentList.get(i).getStuName());
-                            System.out.println("수정할 이름을 입력하세요.");
-                            String word3 = sc.nextLine();
-                            studentList.get(i).setStuName(word3);
-                            System.out.println("수정된 이름: " + word3);
-                            break;
+                    stuSwitch(studentList, word2, i); // 수정 항목 선택 스위치문
 
-                        case "2":
-                            System.out.println("국어 점수 수정");
-                            System.out.println(studentList.get(i).getStuName() + " 의 국어 점수: " + studentList.get(i).getKorScore());
-                            System.out.println("수정할 점수를 입력하세요.");
-                            String word4 = sc.nextLine();
-                            studentList.get(i).setKorScore(Integer.parseInt(word4));
-                            System.out.println("수정된 국어 점수: " + word4);
-                            break;
+                    count = 1;
 
-                        case "3":
-                            System.out.println("영어 점수 수정");
-                            System.out.println(studentList.get(i).getStuName() + " 의 영어 점수: " + studentList.get(i).getMathScore());
-                            System.out.println("수정할 점수를 입력하세요.");
-                            String word5 = sc.nextLine();
-                            studentList.get(i).setMathScore(Integer.parseInt(word5));
-                            System.out.println("수정된 영어 점수: " + word5);
-                            break;
-
-                        case "4":
-                            System.out.println("수학 점수 수정");
-                            System.out.println(studentList.get(i).getStuName() + " 의 수학 점수: " + studentList.get(i).getMathScore());
-                            System.out.println("수정할 점수를 입력하세요.");
-                            String word6 = sc.nextLine();
-                            studentList.get(i).setMathScore(Integer.parseInt(word6));
-                            System.out.println("수정된 수학 점수: " + word6);
-                            break;
-
-                        default:
-
-                            break;
-                    }
-
-                } else {
-                    System.out.println(word + " 번 학생을 찾을 수 없습니다.");
                 }
             }
+
+            if (count == 0) {
+                System.out.println(word + " 번 학생을 찾을 수 없습니다.");
+            }
+
         } else { // 문자 입력
 
             for (int i = 0; i < studentList.size(); i++) { // 입력한 이름으로 학생 찾기
@@ -195,52 +161,15 @@ public class StudentEntity {
 
                     String word2 = sc.nextLine();
 
-                    switch (word2) {
-                        case "1":
-                            System.out.println("이름 수정");
-                            System.out.println("이름: " + studentList.get(i).getStuName());
-                            System.out.println("수정할 이름을 입력하세요.");
-                            String word3 = sc.nextLine();
-                            studentList.get(i).setStuName(word3);
-                            System.out.println("수정된 이름: " + word3);
-                            break;
-
-                        case "2":
-                            System.out.println("국어 점수 수정");
-                            System.out.println(studentList.get(i).getStuName() + " 의 국어 점수: " + studentList.get(i).getKorScore());
-                            System.out.println("수정할 점수를 입력하세요.");
-                            String word4 = sc.nextLine();
-                            studentList.get(i).setKorScore(Integer.parseInt(word4));
-                            System.out.println("수정된 국어 점수: " + word4);
-                            break;
-
-                        case "3":
-                            System.out.println("영어 점수 수정");
-                            System.out.println(studentList.get(i).getStuName() + " 의 영어 점수: " + studentList.get(i).getMathScore());
-                            System.out.println("수정할 점수를 입력하세요.");
-                            String word5 = sc.nextLine();
-                            studentList.get(i).setMathScore(Integer.parseInt(word5));
-                            System.out.println("수정된 영어 점수: " + word5);
-                            break;
-
-                        case "4":
-                            System.out.println("수학 점수 수정");
-                            System.out.println(studentList.get(i).getStuName() + " 의 수학 점수: " + studentList.get(i).getMathScore());
-                            System.out.println("수정할 점수를 입력하세요.");
-                            String word6 = sc.nextLine();
-                            studentList.get(i).setMathScore(Integer.parseInt(word6));
-                            System.out.println("수정된 수학 점수: " + word6);
-                            break;
-
-                        default:
-
-                            break;
-                    }
-
-                } else {
-                    System.out.println("이름이 \"" + word + "\" 인 학생을 찾을 수 없습니다.");
+                    stuSwitch(studentList, word2, i); // 수정 항목 선택 스위치문
+                    count = 1;
                 }
             }
+
+            if (count == 0) {
+                System.out.println("이름이 \"" + word + "\" 인 학생을 찾을 수 없습니다.");
+            }
+
         }
 
     } //editStudents end
@@ -266,5 +195,51 @@ public class StudentEntity {
             }
         }
     } // deleteStudent end
+
+
+    // 수정 항목 선택 스위치문
+    public void stuSwitch(List<Student> studentList, String word2, int i) {
+        switch (word2) {
+            case "1":
+                System.out.println("이름 수정");
+                System.out.println("이름: " + studentList.get(i).getStuName());
+                System.out.println("수정할 이름을 입력하세요.");
+                String word3 = sc.nextLine();
+                studentList.get(i).setStuName(word3);
+                System.out.println("수정된 이름: " + word3);
+                break;
+
+            case "2":
+                System.out.println("국어 점수 수정");
+                System.out.println(studentList.get(i).getStuName() + " 의 국어 점수: " + studentList.get(i).getKorScore());
+                System.out.println("수정할 점수를 입력하세요.");
+                String word4 = sc.nextLine();
+                studentList.get(i).setKorScore(Integer.parseInt(word4));
+                System.out.println("수정된 국어 점수: " + word4);
+                break;
+
+            case "3":
+                System.out.println("영어 점수 수정");
+                System.out.println(studentList.get(i).getStuName() + " 의 영어 점수: " + studentList.get(i).getMathScore());
+                System.out.println("수정할 점수를 입력하세요.");
+                String word5 = sc.nextLine();
+                studentList.get(i).setMathScore(Integer.parseInt(word5));
+                System.out.println("수정된 영어 점수: " + word5);
+                break;
+
+            case "4":
+                System.out.println("수학 점수 수정");
+                System.out.println(studentList.get(i).getStuName() + " 의 수학 점수: " + studentList.get(i).getMathScore());
+                System.out.println("수정할 점수를 입력하세요.");
+                String word6 = sc.nextLine();
+                studentList.get(i).setMathScore(Integer.parseInt(word6));
+                System.out.println("수정된 수학 점수: " + word6);
+                break;
+
+            default:
+
+                break;
+        }
+    } //stuSwitch end
 
 }
